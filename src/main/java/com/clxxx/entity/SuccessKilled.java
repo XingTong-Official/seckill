@@ -7,7 +7,7 @@ import lombok.ToString;
 
 import java.sql.Date;
 @Setter @ToString @Getter
-public class Success_Killed {
+public class SuccessKilled {
     private Byte state;
 
     private Date createTime;

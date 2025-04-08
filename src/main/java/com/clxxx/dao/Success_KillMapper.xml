@@ -6,7 +6,7 @@
     <insert id="insertSuccessKilled">
         insert into seckill values(#{seckillId},#{userPhone},0,current_time)
     </insert>
-    <select id="queryByIdWithSeckill" resultType="com.clxxx.entity.Success_Killed">
+    <select id="queryByIdWithSeckill" resultType="com.clxxx.entity.SuccessKilled">
         select
         sk.seckill_id,
         sk.user_phone,
