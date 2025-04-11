@@ -15,4 +15,9 @@
         ORDER BY create_time DESC
         limit #{offset},#{limit}
     </select>
+    <select id="queryAll" resultType="Seckill">
+        SELECT *
+        FROM seckill
+        ORDER BY create_time DESC
+    </select>
 </mapper>

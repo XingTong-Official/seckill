@@ -6,8 +6,8 @@ import lombok.ToString;
 import java.sql.Date;
 @Setter @Getter @ToString
 public class SecKill {
-    Integer seckillId;
-    Integer number;
+    Long seckillId;
+    Long number;
     String name;
     Date createTime;
     Date startTime;
