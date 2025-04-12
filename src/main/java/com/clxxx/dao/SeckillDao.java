@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Param;
 
 import java.sql.Date;
 import java.util.List;
-
 public interface SeckillDao {
     int reduceNumber(@Param("seckillId") Long seckill_Id, @Param("killTime") Date killTime);
     SecKill queryById(@Param("seckillId") Long seckill_Id);

@@ -1,6 +1,7 @@
 package com.clxxx.dto;
 
 import com.clxxx.entity.SuccessKilled;
+import com.clxxx.enums.SeckillEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,16 +16,16 @@ public class SeckillExecution {
     private String stateInfo;
     private SuccessKilled successKilled;
 
-    public SeckillExecution(Long seckillId, int state, String stateInfo, SuccessKilled successKilled) {
+    public SeckillExecution(Long seckillId, SeckillEnum state, SuccessKilled successKilled) {
         this.seckillId = seckillId;
-        this.state = state;
-        this.stateInfo = stateInfo;
+        this.state = state.getState();
+        this.stateInfo = state.getStateInfo();
         this.successKilled = successKilled;
     }
 
-    public SeckillExecution(Long seckillId, int state, String stateInfo) {
+    public SeckillExecution(Long seckillId, SeckillEnum state, String stateInfo) {
         this.seckillId = seckillId;
-        this.state = state;
-        this.stateInfo = stateInfo;
+        this.state = state.getState();
+        this.stateInfo = state.getStateInfo();
     }
 }
