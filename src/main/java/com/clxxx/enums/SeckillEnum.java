@@ -24,6 +24,7 @@ public enum SeckillEnum {
                 return state;
             }
         }
+        return null;
     }
 
 }
