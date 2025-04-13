@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
@@ -39,6 +40,7 @@ public class SeckillServiceImpl implements SeckillService{
     }
 
     @Override
+    @Transactional
     public Exposer exportSeckillUrl(Long id) {
         SecKill secKill = seckillDao.queryById(id);
         if(secKill == null||secKill.getNumber()<=0){
