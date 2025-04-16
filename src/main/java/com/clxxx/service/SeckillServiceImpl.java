@@ -40,7 +40,6 @@ public class SeckillServiceImpl implements SeckillService{
     }
 
     @Override
-    @Transactional
     public Exposer exportSeckillUrl(Long id) {
         SecKill secKill = seckillDao.queryById(id);
         if(secKill == null||secKill.getNumber()<=0){
@@ -62,11 +61,12 @@ public class SeckillServiceImpl implements SeckillService{
     }
 
     @Override
+    @Transactional
     public SeckillExecution executeSeckill(Long seckillId, Long userphone, String md5) throws RepeatKillException, SeckillException,SeckillCloseException {
-        if(md5==null || md5.equals(getMD5(seckillId))){
+        if(md5==null || !md5.equals(getMD5(seckillId))){
             throw new SeckillException("seckill data rewrite");
         }
-        java.sql.Date nowTime= new java.sql.Date(new Date().getTime());
+        Date nowTime= new Date();
         int updateCount = seckillDao.reduceNumber(seckillId,nowTime);
         try {
             if(updateCount<=0){
@@ -83,7 +83,7 @@ public class SeckillServiceImpl implements SeckillService{
                     return new SeckillExecution(seckillId, SeckillEnum.SUCCESS,successKilled);
                 }
             }
-        }catch (SeckillException e1){
+        }catch (SeckillCloseException e1){
             throw e1;
         }
         catch (RepeatKillException e2){

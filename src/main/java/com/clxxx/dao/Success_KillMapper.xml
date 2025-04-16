@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.clxxx.dao.SuccessKilledDao">
     <insert id="insertSuccessKilled">
-        insert into seckill values(#{seckillId},#{userPhone},0,current_time)
+        insert into success_killed values(#{seckillId},#{userPhone},0,current_time)
     </insert>
     <select id="queryByIdWithSeckill" resultType="com.clxxx.entity.SuccessKilled">
         select

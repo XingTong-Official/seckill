@@ -9,12 +9,12 @@
     <update id="reduceNumber">
         update seckill set number=number-1 where seckill_id=#{seckillId} and #{killTime} >=start_time and #{killTime} <![CDATA[<=]]> end_time and number > 0
     </update>
-    <select id="queryAll" resultType="Seckill">
-        SELECT *
-        FROM seckill
-        ORDER BY create_time DESC
-        limit #{offset},#{limit}
-    </select>
+<!--    <select id="queryAll" resultType="Seckill">-->
+<!--        SELECT *-->
+<!--        FROM seckill-->
+<!--        ORDER BY create_time DESC-->
+<!--        limit #{offset},#{limit}-->
+<!--    </select>-->
     <select id="queryAll" resultType="Seckill">
         SELECT *
         FROM seckill
