@@ -4,6 +4,9 @@ import com.clxxx.dto.Exposer;
 import com.clxxx.dto.SeckillExecution;
 import com.clxxx.dto.SeckillResult;
 import com.clxxx.entity.SecKill;
+import com.clxxx.enums.SeckillEnum;
+import com.clxxx.exception.RepeatKillException;
+import com.clxxx.exception.SeckillCloseException;
 import com.clxxx.service.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -58,9 +62,28 @@ public class SeckillController {
         if(phone==null) return new SeckillResult<SeckillExecution>(false,"未注册");
         try {
             SeckillExecution execution=seckillService.executeSeckill(seckillId,phone,md5);
-        } catch (Exception e) {
-            logger.error(e.getMessage(),e);
+            return new SeckillResult<SeckillExecution>(true,execution);
         }
-        return null;
+        catch (RepeatKillException e){
+            logger.error(e.getMessage(),e);
+            SeckillExecution execution=new SeckillExecution(seckillId,SeckillEnum.REPEAT_KILL);
+            return new SeckillResult<SeckillExecution>(false,execution);
+        }
+        catch (SeckillCloseException e){
+            logger.error(e.getMessage(),e);
+            SeckillExecution execution=new SeckillExecution(seckillId,SeckillEnum.END);
+            return new SeckillResult<SeckillExecution>(false,execution);
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage(),e);
+            SeckillExecution execution=new SeckillExecution(seckillId,SeckillEnum.INNER_ERROR);
+            return new SeckillResult<SeckillExecution>(false,execution);
+        }
+    }
+    @RequestMapping(value = "/time/now",method = RequestMethod.GET)
+    @ResponseBody
+    public SeckillResult<Long> time(){
+        Date now=new Date();
+        return new SeckillResult<Long>(true,now.getTime());
     }
 }
